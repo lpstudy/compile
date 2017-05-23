@@ -1,0 +1,11 @@
+[Application]
+WindowPlacement=0 1 -1 -1 -1 -1 -11 64 1353 800
+[Editor1]
+FileName=.\lex.l
+ReadOnly=0
+WindowPlacement1=2 3 -1 -1 -8 -30 265 6 1077 618
+WindowOrder1=1
+Position001=0 5
+Cursor001=0 13 0 13
+SyntaxColouring=1
+TargetSyntaxColouring=3

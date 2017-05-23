@@ -1,0 +1,55 @@
+lex编译器编译lex.l生成lex.h, lex.cpp进行词法分析，解析token，并将结果传递给yacc
+yacc编译器编译yacc.y生成yacc.h,yacc.cpp进行语法分析，构建语法树
+外部支撑组件
+    1，语法树的遍历
+    2，符号表的构建
+yacc编译器的动作是语法树的构建过程
+
+lex和yacc通信，参见lex_yacc_vs_calculator目录文件
+    lex和yacc进行通信，需要相互包含对方的头文件。lex中加入传递变量的代码：YYSTYPE YYFAR& yylval = *(YYSTYPE YYFAR*)yyparserptr->yylvalptr;
+    yacc中通过%token定义token，lex中不需要进行token的定义。
+    lex对于给定的规则，返回相应的token标识，例如"+"         {print_token(PLUS, yytext); return PLUS;}， 而yacc程序根据token进行相应的行为，例如expr	:	expr PLUS expr	{ $$ = $1 + $3; }。 lex如果遇到数字的话，需要返回Number标识并将yylval进行赋值，yacc收到number标识后，从yylval中读取到变量（默认就是从它读取，因此只需要$$=$1即可，并且是可省略的）。
+   
+lex和yacc通信，支持变量定义的计算器   
+为了简单起见，仅支持key为变量名，value为double类型值的符号表。
+需要
+
+工程摘要：
+support-treeTraverse
+基本c++版本语法树，语法树需要手动构建，仅支持简单的算术运算，结构定义完整
+
+support-treeTraverse-if-while
+经过lpstudy扩展的版本，支持变量输入输出，支持if，while语句，支持很多算术，比较逻辑运算，支持变量赋值语句。有一个独特的地方是a=2;这样的解析：它是一个statement，核心是一个expression，因此我构造了一种EXPR_STMT的语句类型，这个语句只有一个表达式的孩子。
+代码中的测试程序实现了基本的输入输出，以及if，while的用法，这些语法树通过手动过程实现的，并没有符号表的支持。
+
+lex_yacc_vs_calculator_with_variable
+使用lex和yacc实现的计算器，支持基本的算术运算，支持浮点数。为了支持计算器变量，定义简单的符号表，能够变量到符号表，同时能够从符号表中得到变量的值
+
+下一步的考虑
+1，工程1，对support-treeTraverse-if-while增加符号表的功能，而不是简单的直接将value存储到变量的属性中。实际上value和变量名的映射存储到符号表中，而变量的属性保存的不是value，而是此变量在符号表的索引位置。当需要读取变量值时，根据位置从符号表中取。
+2，工程2，在工程1的基础上加入lex和yacc分析，不支持函数，但支持基本的编译型时运算，也就是说经过编译之后构建一颗语法树，然后执行语法树，可得到运算结果。如果支持汇编的话，可以编译之后构建一颗语法树，执行语法树的过程是生成汇编代码的过程，暂时也不实现。
+3，工程3，给Node继承，对于不同类型的Node有不同的execute方法，这个实现比较复杂，需要将过去的kind类型完全干掉，依赖node自身的类型，使用虚函数可实现。
+class Node
+{
+    virtual void execute();
+}
+class StmtNode : public Node;
+class ExprNode : public Node;
+class InputStmtNode : public StmtNode;
+class IfStmtNode : public StmtNode;
+class WhileStmtNode : public StmtNode;
+class CompStmtNode : public StmtNode
+{
+    
+}
+class OpTwoExprNode : public ExprNode; // a + b,  a && b,  a += b ...
+class OpOneExprNode : public ExprNode;// !a,  ++a, --a, a-- ...
+class ConstExprNode : public ExprNode;
+class OTAddExprNode : public OpTwoExprNode; // a + b
+class OTAddEqExprNode : public OpTwoExprNode; // a += b
+
+void main()
+{
+    Node* root = createTree();
+    root->execute();//this is enough.
+}

@@ -1,0 +1,34 @@
+[Application]
+WindowPlacement=2 2 -32000 -32000 -1 -1 478 192 1229 698
+[Editor1]
+FileName=.\yacc.y
+ReadOnly=0
+WindowPlacement1=0 1 -1 -1 -1 -1 274 84 1487 588
+WindowOrder1=2
+Position001=0 33
+Cursor001=0 41 0 41
+SyntaxColouring=2
+TargetSyntaxColouring=3
+[Editor2]
+FileName=.\lex.l
+ReadOnly=0
+WindowPlacement1=0 1 -1 -1 -1 -1 75 75 1691 730
+WindowOrder1=3
+Position001=0 13
+Cursor001=9 28 9 28
+SyntaxColouring=1
+TargetSyntaxColouring=3
+[Project]
+WindowPlacement1=0 1 -1 -1 -1 -1 0 0 606 270
+WindowOrder1=4
+[ProjectFolders1]
+FolderCount=2
+FolderName1=Source Files
+FolderExpanded1=1
+FolderName2=Output Files
+FolderExpanded2=0
+[Output]
+WindowPlacement1=0 1 -1 -1 -1 -1 111 124 1831 769
+WindowOrder1=1
+Position1=0 1
+Cursor1=0 14 0 14

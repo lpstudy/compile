@@ -1,0 +1,25 @@
+[Application]
+WindowPlacement=0 1 -32000 -32000 -1 -1 380 195 1528 959
+[Editor1]
+FileName=.\yacc.y
+ReadOnly=0
+WindowPlacement1=0 1 -1 -1 -8 -30 0 217 1128 434
+WindowOrder1=2
+Position001=0 27
+Cursor001=0 36 0 36
+SyntaxColouring=2
+TargetSyntaxColouring=3
+[Project]
+WindowPlacement1=0 1 -1 -1 -8 -30 0 434 1128 651
+WindowOrder1=3
+[ProjectFolders1]
+FolderCount=2
+FolderName1=Source Files
+FolderExpanded1=1
+FolderName2=Output Files
+FolderExpanded2=0
+[Output]
+WindowPlacement1=2 3 -1 -1 -8 -30 0 0 1128 217
+WindowOrder1=1
+Position1=0 1
+Cursor1=0 5 0 5

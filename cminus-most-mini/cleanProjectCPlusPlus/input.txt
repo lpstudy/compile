@@ -1,0 +1,72 @@
+main()
+{
+	a = 1;
+	if(a>10){
+	  a = 11;
+	}else{
+	  a = 7;
+	}
+	output(a);
+    
+    sum = 0;
+    a = 1;
+    while(a<100){
+        sum = sum + a;
+        a = a + 1;
+    }
+    output(sum);
+    
+    a = 1;
+	output(a);
+    while(a != 100){
+        input(a);
+        if(a<10){
+            output(a);
+        }else{
+            output(sum);
+        }
+    }
+}
+
+
+main() 
+{      
+    //求解X1，在曲线对称轴处选择初始点     
+    //x^2+3x+2 = 0
+    a = 1;
+    b = 3;
+    c = 2;
+    accuracy = 0.00001;
+    index=(-1.0*b)/(2*a);
+    if(b!=0)//b不等于0时进行迭代     
+    {          
+        temp=index;          
+        index=-1.0*(a*temp*temp+c)/b;    
+        while((fabs(index-temp))>accuracy)         
+        {              
+            temp=index;              
+            index=-1.0*(a*temp*temp+c)/b;         
+        }          
+        x1=index;          
+        x2=(-1.0*b)/a-x1; 
+    }      
+    else//b=0时ax^2+c=0直接求解     
+    {          
+        x1=sqrt(-1.0*c/a);         
+        x2=-x1;     
+    } 
+
+    output(x1);
+    output(x2);
+}
+
+
+
+
+
+
+
+
+
+
+
